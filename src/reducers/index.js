@@ -1,12 +1,5 @@
 import { combineReducers } from 'redux'
-
-const postsReducer = (posts = [], action) => {
-  if (action.type === 'FETCH_POSTS') {
-    return [...posts, ...action.payload]
-  }
-
-  return posts
-}
+import postsReducer from './postsReducer'
 
 const errorPostsReducer = (error = null, action) => {
   if (action.type === 'ERROR_FETCH_POSTS') {
