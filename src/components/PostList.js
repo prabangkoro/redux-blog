@@ -10,9 +10,19 @@ class PostList extends Component {
   renderPostList () {
     return this.props.posts.map((post, index) => {
       return (
-        <li key={index}>
-          {post.title}
-        </li>
+        <div className="item" key={index}>
+          <i className="large middle align icon user"></i>
+          <div className="content">
+            <div className="description">
+              <h2>
+                {post.title}
+              </h2>
+              <p>
+                {post.body}
+              </p>
+            </div>
+          </div>
+        </div>
       )
     })
   }
@@ -26,9 +36,9 @@ class PostList extends Component {
         <div>
           Counter: {this.props.posts.length}
         </div>
-        <ol>
-          {this.renderPostList()}
-        </ol>
+          <div className="ui relaxed divided list">
+            {this.renderPostList()}
+          </div>
       </div>
     )
   }
