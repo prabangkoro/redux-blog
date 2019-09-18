@@ -38,9 +38,9 @@ class PostList extends Component {
         <div>
           Counter: {this.props.posts.length}
         </div>
-          <div className="ui relaxed divided list">
-            {this.renderPostList()}
-          </div>
+        <div className="ui relaxed divided list">
+          {this.renderPostList()}
+        </div>
       </div>
     )
   }
