@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import postsReducer from './postsReducer'
+import userReducer from './userReducer'
 
 const errorPostsReducer = (error = null, action) => {
   if (action.type === 'ERROR_FETCH_POSTS') {
@@ -11,5 +12,6 @@ const errorPostsReducer = (error = null, action) => {
 
 export default combineReducers ({
   posts: postsReducer,
-  error: errorPostsReducer
+  error: errorPostsReducer,
+  users: userReducer
 })
