@@ -1,29 +1,25 @@
 import jsonPlaceholder from '../api/jsonPlaceholder'
 import _ from 'lodash'
 
-export const fetchPosts = () => dispatch => {
-  jsonPlaceholder.get('/posts')
-    .then(response => {
-      dispatch({
-        type: 'FETCH_POSTS',
-        payload: response.data
-      })
-    })
-    .catch(error => {
-      dispatch({
-        type: 'ERROR_FETCH_POSTS',
-        payload: error
-      })
-    })
+export const fetchPosts = () => async dispatch => {
+  const response = await jsonPlaceholder.get('/posts')
+  dispatch({
+    type: 'FETCH_POSTS',
+    payload: response.data
+  })
 }
 
-const _fetchUser = _.memoize((id, dispatch) => {
-  jsonPlaceholder.get(`/users/${id}`)
-    .then(response => {
-      dispatch({
-        type: 'FETCH_USER',
-        payload: response.data
-      })
-    })
-})
-export const fetchUser = id => dispatch => _fetchUser(id, dispatch)
+export const fetchUser = id => async dispatch => {
+  const response = await jsonPlaceholder.get(`/users/${id}`)
+  dispatch({
+    type: 'FETCH_USER',
+    payload: response.data
+  })
+}
+
+export const fetchPostAndUsers = () => async (dispatch, getState) => {
+  await dispatch(fetchPosts())
+
+  const users = _.uniq(_.map(getState().posts, 'userId'))
+  users.forEach(id => dispatch(fetchUser(id)))
+}

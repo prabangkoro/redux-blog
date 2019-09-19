@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPosts } from '../actions'
+import { fetchPostAndUsers } from '../actions'
 import UserHeader from './UserHeader'
 
 class PostList extends Component {
   componentDidMount () {
-    this.props.fetchPosts()
+    this.props.fetchPostAndUsers()
   }
 
   renderPostList () {
@@ -32,7 +32,7 @@ class PostList extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.props.fetchPosts}>
+        <button onClick={this.props.fetchPostAndUsers}>
           Add More!
         </button>
         <div>
@@ -50,4 +50,4 @@ const mapsStateToProps = state => ({
   posts: state.posts
 })
 
-export default connect(mapsStateToProps, { fetchPosts })(PostList)
+export default connect(mapsStateToProps, { fetchPostAndUsers })(PostList)
