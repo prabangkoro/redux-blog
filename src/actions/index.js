@@ -1,5 +1,5 @@
 import jsonPlaceholder from '../api/jsonPlaceholder'
-
+import _ from 'lodash'
 
 export const fetchPosts = () => dispatch => {
   jsonPlaceholder.get('/posts')
@@ -17,7 +17,7 @@ export const fetchPosts = () => dispatch => {
     })
 }
 
-export const fetchUser = (id) => dispatch => {
+const _fetchUser = _.memoize((id, dispatch) => {
   jsonPlaceholder.get(`/users/${id}`)
     .then(response => {
       dispatch({
@@ -25,4 +25,5 @@ export const fetchUser = (id) => dispatch => {
         payload: response.data
       })
     })
-}
+})
+export const fetchUser = id => dispatch => _fetchUser(id, dispatch)
